@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FormaFlow Coaching Platform</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <div class="brand">
+          <div class="brand-mark">FF</div>
+          <div>
+            <strong>FormaFlow</strong>
+            <span>Fitness coaching OS</span>
+          </div>
+        </div>
+        <nav class="nav-list">
+          <button class="nav-link active" data-view="onboarding" type="button" aria-label="Open onboarding">
+            <span class="icon" data-icon="user"></span>
+            <span>Onboarding</span>
+          </button>
+          <button class="nav-link" data-view="meals" type="button" aria-label="Open meal uploads">
+            <span class="icon" data-icon="camera"></span>
+            <span>Meals</span>
+          </button>
+          <button class="nav-link" data-view="dashboard" type="button" aria-label="Open dashboard">
+            <span class="icon" data-icon="chart"></span>
+            <span>Dashboard</span>
+          </button>
+          <button class="nav-link" data-view="progress" type="button" aria-label="Open progress">
+            <span class="icon" data-icon="target"></span>
+            <span>Progress</span>
+          </button>
+          <button class="nav-link" data-view="admin" type="button" aria-label="Open admin panel">
+            <span class="icon" data-icon="shield"></span>
+            <span>Admin</span>
+          </button>
+        </nav>
+        <div class="sidebar-card">
+          <span class="status-dot"></span>
+          <p>Automation-ready workflow for reminders, weekly AI summaries, and coach review.</p>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Body recomposition coaching platform</p>
+            <h1>Participant intelligence, meal analysis, and progress automation.</h1>
+          </div>
+          <div class="topbar-actions">
+            <select id="participantSwitch" aria-label="Select participant"></select>
+            <button id="seedDemo" class="button ghost" type="button">
+              <span class="icon" data-icon="spark"></span>
+              Demo data
+            </button>
+          </div>
+        </header>
+
+        <section class="view active" id="view-onboarding">
+          <div class="section-grid">
+            <form id="participantForm" class="panel form-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Participant registration</p>
+                  <h2>Health assessment</h2>
+                </div>
+                <span class="pill">BMI, BMR, TDEE auto-calculated</span>
+              </div>
+
+              <div class="form-grid">
+                <label>
+                  Full name
+                  <input name="name" type="text" placeholder="Ariana Lee" required />
+                </label>
+                <label>
+                  Age
+                  <input name="age" type="number" min="13" max="95" value="32" required />
+                </label>
+                <label>
+                  Gender
+                  <select name="gender">
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                  </select>
+                </label>
+                <label>
+                  Height (cm)
+                  <input name="height" type="number" min="120" max="230" value="168" required />
+                </label>
+                <label>
+                  Weight (kg)
+                  <input name="weight" type="number" min="35" max="220" step="0.1" value="72" required />
+                </label>
+                <label>
+                  Activity level
+                  <select name="activity">
+                    <option value="1.2">Sedentary</option>
+                    <option value="1.375">Light exercise</option>
+                    <option value="1.55" selected>Moderate exercise</option>
+                    <option value="1.725">Heavy exercise</option>
+                    <option value="1.9">Athlete</option>
+                  </select>
+                </label>
+                <label>
+                  Goal
+                  <select name="goal">
+                    <option value="fat-loss">Fat loss</option>
+                    <option value="muscle-gain">Muscle gain</option>
+                    <option value="maintenance">Maintenance</option>
+                  </select>
+                </label>
+                <label>
+                  Body fat (%)
+                  <input name="bodyFat" type="number" min="3" max="65" step="0.1" value="28" required />
+                </label>
+                <label>
+                  Muscle (%)
+                  <input name="muscle" type="number" min="10" max="75" step="0.1" value="34" required />
+                </label>
+              </div>
+
+              <div class="form-actions">
+                <button class="button primary" type="submit">
+                  <span class="icon" data-icon="check"></span>
+                  Generate report
+                </button>
+                <button id="resetForm" class="button secondary" type="button">Clear</button>
+              </div>
+            </form>
+
+            <article id="summaryReport" class="panel report-panel">
+              <div class="empty-state">
+                <span class="icon xl" data-icon="clipboard"></span>
+                <h2>No participant report yet</h2>
+                <p>Complete the assessment to generate calorie targets, coaching guidance, and an 8-week target path.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="view-meals">
+          <div class="section-grid">
+            <div class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Daily upload system</p>
+                  <h2>Meal images</h2>
+                </div>
+                <span class="pill">Multiple images supported</span>
+              </div>
+              <div class="meal-type-tabs" role="tablist" aria-label="Meal type">
+                <button class="meal-tab active" data-meal-type="breakfast" type="button">Breakfast</button>
+                <button class="meal-tab" data-meal-type="lunch" type="button">Lunch</button>
+                <button class="meal-tab" data-meal-type="dinner" type="button">Dinner</button>
+                <button class="meal-tab" data-meal-type="snack" type="button">Snack</button>
+              </div>
+              <label class="dropzone" for="mealImages">
+                <span class="icon xl" data-icon="upload"></span>
+                <strong>Upload meal photos</strong>
+                <span>Images are timestamped and analyzed as AI-estimated nutritional values.</span>
+                <input id="mealImages" type="file" accept="image/*" multiple />
+              </label>
+              <div class="upload-actions">
+                <button id="analyzeMeal" class="button primary" type="button">
+                  <span class="icon" data-icon="spark"></span>
+                  Analyze meal
+                </button>
+                <p id="uploadStatus" class="muted">Select a participant and add images to begin.</p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">AI dietitian perspective</p>
+                  <h2>Latest meal feedback</h2>
+                </div>
+              </div>
+              <div id="latestMealAnalysis" class="analysis-card empty-state">
+                <span class="icon xl" data-icon="utensils"></span>
+                <h2>No meal analyzed yet</h2>
+                <p>Upload breakfast, lunch, dinner, or snack images to generate estimated nutrition and coachable feedback.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel full-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Upload history</p>
+                <h2>Meal timeline</h2>
+              </div>
+            </div>
+            <div id="mealHistory" class="meal-history"></div>
+          </div>
+        </section>
+
+        <section class="view" id="view-dashboard">
+          <div id="dashboardContent"></div>
+        </section>
+
+        <section class="view" id="view-progress">
+          <div class="section-grid">
+            <div class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Goal tracking</p>
+                  <h2>Progress monitor</h2>
+                </div>
+              </div>
+              <div id="progressMonitor"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Automation center</p>
+                  <h2>Reminders & summaries</h2>
+                </div>
+              </div>
+              <div class="automation-stack">
+                <label class="toggle-row">
+                  <span>
+                    <strong>Daily meal reminder</strong>
+                    <small>Push notification ready</small>
+                  </span>
+                  <input id="dailyReminder" type="checkbox" checked />
+                </label>
+                <label class="toggle-row">
+                  <span>
+                    <strong>WhatsApp reminder integration</strong>
+                    <small>Webhook-ready status</small>
+                  </span>
+                  <input id="whatsappReady" type="checkbox" />
+                </label>
+                <label class="toggle-row">
+                  <span>
+                    <strong>Email reminder integration</strong>
+                    <small>Template-ready status</small>
+                  </span>
+                  <input id="emailReady" type="checkbox" checked />
+                </label>
+                <button id="generateWeeklySummary" class="button primary" type="button">
+                  <span class="icon" data-icon="spark"></span>
+                  Generate weekly summary
+                </button>
+                <div id="weeklySummary" class="summary-box"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="view-admin">
+          <div class="panel full-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Admin panel</p>
+                <h2>Participants & engagement</h2>
+              </div>
+              <div class="admin-actions">
+                <select id="progressFilter" aria-label="Filter participants by progress">
+                  <option value="all">All progress</option>
+                  <option value="on-track">On track</option>
+                  <option value="attention">Needs attention</option>
+                </select>
+                <button id="exportReports" class="button secondary" type="button">
+                  <span class="icon" data-icon="download"></span>
+                  Export reports
+                </button>
+              </div>
+            </div>
+            <div id="adminTable" class="admin-table"></div>
+          </div>
+
+          <div class="panel full-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Coach review</p>
+                <h2>AI analysis override</h2>
+              </div>
+            </div>
+            <div id="overridePanel" class="override-panel"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
